@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MVC_Crud_Net8.Data;
 using MVC_Crud_Net8.Models.Entities;
 using MVC_Crud_Net8.Models.ViewModel;
@@ -35,6 +36,13 @@ namespace MVC_Crud_Net8.Controllers
             await _context.SaveChangesAsync();
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var students = await _context.Students.ToListAsync();
+            return View(students);
         }
     }
 }
